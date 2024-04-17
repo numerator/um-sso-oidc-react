@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+
+import { AuthProvider } from 'oidc-react';
+import { LoginScreen } from './Login';
 import './App.css';
 
-function App() {
+//const LEVEL1_AUTHORITY = "https://shibboleth.umich.edu/idp/profile/oidc/authorize"
+
+const LEVEL1_AUTHORITY = "https://shibboleth.umich.edu/";
+const LEVEL1_SCOPE = "openid profile email eduperson_affiliation";
+const LEVEL1_RESPONSETYPE = "code";
+const LEVEL1_REDIRECTURI = "http://localhost:3000";
+const LEVEL1_CLIENT_ID = process.env.REACT_APP_LEVEL1_CLIENT_ID;
+const LEVEL1_CLIENT_SECRET = process.env.REACT_APP_LEVEL1_CLIENT_SECRET;
+
+console.log(LEVEL1_CLIENT_ID);
+
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider
+      authority={LEVEL1_AUTHORITY}
+      clientId={LEVEL1_CLIENT_ID}
+      clientSecret={LEVEL1_CLIENT_SECRET}
+      scope={LEVEL1_SCOPE}
+      responseType={LEVEL1_RESPONSETYPE}
+      redirectUri={LEVEL1_REDIRECTURI}
+    >
+      <LoginScreen/>
+    </AuthProvider>
   );
 }
 
 export default App;
+

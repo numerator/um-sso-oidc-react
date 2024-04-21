@@ -5,7 +5,6 @@ export function LoginScreen () {
     const auth = useAuth();
     console.log(auth.userData);
 
-
     if (auth.userData) {
         return (
             <div>
@@ -14,7 +13,6 @@ export function LoginScreen () {
                 </p>
                 <p>
                     <button onClick={auth.signOut}>Log out</button>
-
                 </p>
             </div>
         )
